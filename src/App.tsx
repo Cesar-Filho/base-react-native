@@ -7,6 +7,7 @@
 
 import React from 'react';
 import type {PropsWithChildren} from 'react';
+import {Button} from '@components/Button';
 import {
   SafeAreaView,
   ScrollView,
@@ -90,6 +91,7 @@ function App(): JSX.Element {
             Read the docs to discover what to do next:
           </Section>
           <LearnMoreLinks />
+          <Button />
         </View>
       </ScrollView>
     </SafeAreaView>
