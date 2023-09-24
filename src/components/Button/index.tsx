@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ActivityIndicator,
   StyleSheet,
   TouchableOpacity,
   TouchableOpacityProps,
@@ -25,6 +26,7 @@ export function Button({
   style,
   mode = 'container',
   primary = true,
+  disabled,
   title,
   ...props
 }: ButtonProps) {
@@ -38,8 +40,13 @@ export function Button({
       style={[buttonStyle, style]}
       activeOpacity={0.8}
       testID="ComponentButton"
+      disabled={disabled}
       {...props}>
-      <Typography variation="button">{title}</Typography>
+      {disabled ? (
+        <ActivityIndicator color={colors.common.white} />
+      ) : (
+        <Typography variation="button">{title}</Typography>
+      )}
     </TouchableOpacity>
   );
 }
