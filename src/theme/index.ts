@@ -18,20 +18,16 @@ export const typography = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: '700',
-    color: '#FFF',
   },
   subtitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#FFF',
   },
   body: {
     fontSize: 14,
-    color: '#FFF',
   },
   button: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#FFF',
   },
 });

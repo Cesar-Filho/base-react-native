@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TextProps} from 'react-native';
+import {StyleSheet, Text, TextProps} from 'react-native';
 
 import {typography} from '@theme/index';
 
@@ -14,8 +14,12 @@ export function Typography({
   ...props
 }: TypographyProps) {
   return (
-    <Text {...props} style={[style, typography[variation]]}>
+    <Text {...props} style={[styles.fontColor, style, typography[variation]]}>
       {children}
     </Text>
   );
 }
+
+const styles = StyleSheet.create({
+  fontColor: {color: '#FFF'},
+});
