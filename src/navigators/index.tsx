@@ -8,22 +8,25 @@ import {Routes} from './routes';
 const Stack = createNativeStackNavigator();
 
 export const Navigator = () => {
-  const isLogged = true;
+  const isLogged = false;
 
   return (
-    <Stack.Navigator>
-      {isLogged ? (
-        <Stack.Screen
-          name={Routes.LOGIN}
-          component={LoginScreen}
-          options={{
-            title: 'Login',
-            animationTypeForReplace: isLogged ? 'pop' : 'push',
-          }}
-        />
-      ) : (
-        <Stack.Screen name={Routes.HOME} component={HomeScreen} />
-      )}
+    <Stack.Navigator initialRouteName={isLogged ? Routes.HOME : Routes.LOGIN}>
+      <Stack.Screen
+        name={Routes.LOGIN}
+        component={LoginScreen}
+        options={{
+          title: 'Login',
+          animationTypeForReplace: isLogged ? 'pop' : 'push',
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name={Routes.HOME}
+        component={HomeScreen}
+        options={{title: 'Usuário', headerBackVisible: false}}
+      />
     </Stack.Navigator>
   );
 };

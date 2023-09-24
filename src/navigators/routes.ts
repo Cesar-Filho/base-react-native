@@ -1,4 +1,4 @@
-export const Routes = {
-  LOGIN: 'LOGIN',
-  HOME: 'HOME',
-};
+export enum Routes {
+  LOGIN = 'LOGIN',
+  HOME = 'HOME',
+}

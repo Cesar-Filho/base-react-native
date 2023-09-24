@@ -2,10 +2,15 @@ import React, {createContext, useContext, useState} from 'react';
 
 import {Spacing, ThemeDark, ThemeLight, ThemeMain} from '@theme/index';
 
+export interface ThemeProps {
+  colors: typeof ThemeMain;
+  spacing: typeof Spacing;
+}
+
 interface ThemeContextProps {
   isDarkMode: boolean;
   toggleDarkMode: () => void;
-  theme: {colors: typeof ThemeMain; spacing: typeof Spacing};
+  theme: ThemeProps;
 }
 
 const ThemeContext = createContext<ThemeContextProps>({} as ThemeContextProps);

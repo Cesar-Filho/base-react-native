@@ -6,6 +6,9 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 import {Navigator} from './navigators';
 import {ThemeProvider} from '@contexts/theme';
+import {Provider} from 'react-redux';
+import {persistor, store} from './store';
+import {PersistGate} from 'redux-persist/integration/react';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -17,15 +20,19 @@ function App(): JSX.Element {
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <ThemeProvider>
-        <NavigationContainer>
-          <StatusBar
-            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-            backgroundColor={backgroundStyle.backgroundColor}
-          />
-          <Navigator />
-        </NavigationContainer>
-      </ThemeProvider>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <ThemeProvider>
+            <NavigationContainer>
+              <StatusBar
+                barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+                backgroundColor={backgroundStyle.backgroundColor}
+              />
+              <Navigator />
+            </NavigationContainer>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
     </SafeAreaView>
   );
 }
