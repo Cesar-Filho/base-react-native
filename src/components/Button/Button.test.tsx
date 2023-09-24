@@ -1,7 +1,7 @@
 import React from 'react';
-import {fireEvent, render} from '@testing-library/react-native';
 import {StyleSheet} from 'react-native';
 
+import {fireEvent, render} from '@utils/test-utils';
 import {Button} from '@components/Button';
 
 const {BUTTON_STYLE} = StyleSheet.create({
