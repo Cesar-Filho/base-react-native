@@ -2,14 +2,14 @@ import React from 'react';
 import {StatusBar, useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {PersistGate} from 'redux-persist/integration/react';
+import {Provider} from 'react-redux';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-import {Navigator} from './navigators';
-import {ThemeProvider} from '@contexts/theme';
-import {Provider} from 'react-redux';
 import {persistor, store} from './store';
-import {PersistGate} from 'redux-persist/integration/react';
+import {ThemeProvider} from '@contexts/theme';
 import {ErrorBoundary} from '@components/ErrorBoundary';
+import {Navigator} from './navigators';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
