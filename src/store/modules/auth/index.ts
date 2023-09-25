@@ -2,12 +2,12 @@ import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {IAuth} from './interface';
 
 export interface AuthState {
-  detail: IAuth | undefined;
+  detail: IAuth;
   isLogged: boolean;
 }
 
 const initialState: AuthState = {
-  detail: undefined,
+  detail: {} as IAuth,
   isLogged: false,
 };
 

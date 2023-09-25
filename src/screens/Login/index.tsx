@@ -42,10 +42,12 @@ export function LoginScreen() {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.content}>
           <Input
+            autoFocus
             label="Nome do usuário"
             value={username}
             placeholder="Digite seu nome de usuário"
             returnKeyType="next"
+            autoCapitalize="none"
             onSubmitEditing={() => passwordRef?.current?.focus()}
             onChangeText={setEmail}
           />
