@@ -9,6 +9,7 @@ import {ThemeProvider} from '@contexts/theme';
 import {Provider} from 'react-redux';
 import {persistor, store} from './store';
 import {PersistGate} from 'redux-persist/integration/react';
+import {ErrorBoundary} from '@components/ErrorBoundary';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -20,19 +21,21 @@ function App(): JSX.Element {
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>
-          <ThemeProvider>
-            <NavigationContainer>
-              <StatusBar
-                barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-                backgroundColor={backgroundStyle.backgroundColor}
-              />
-              <Navigator />
-            </NavigationContainer>
-          </ThemeProvider>
-        </PersistGate>
-      </Provider>
+      <ErrorBoundary>
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            <ThemeProvider>
+              <NavigationContainer>
+                <StatusBar
+                  barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+                  backgroundColor={backgroundStyle.backgroundColor}
+                />
+                <Navigator />
+              </NavigationContainer>
+            </ThemeProvider>
+          </PersistGate>
+        </Provider>
+      </ErrorBoundary>
     </SafeAreaView>
   );
 }
