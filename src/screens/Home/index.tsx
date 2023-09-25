@@ -11,13 +11,14 @@ import {Typography} from '@components/Typography';
 import {LineText} from '@components/LineText';
 import {Loading} from '@components/Loading';
 import {Button} from '@components/Button';
+import {Switch} from '@components/Switch';
 
 export function HomeScreen() {
   const auth = useAppSelector(state => state.auth.detail);
   const {data, isLoading} = useGetUserQuery({id: auth?.id});
   const dispatch = useAppDispatch();
 
-  const {theme} = useThemeContext();
+  const {theme, isDarkMode, toggleDarkMode} = useThemeContext();
   const styles = styling(theme);
 
   const logout = () => dispatch(AuthActions.logout());
@@ -40,6 +41,7 @@ export function HomeScreen() {
     <ScrollView
       contentContainerStyle={styles.container}
       showsVerticalScrollIndicator={false}>
+      <Switch label="DarkMode" value={isDarkMode} onChange={toggleDarkMode} />
       <ImageAvatar uri={data.image} />
       <LineText label="Nome" value={`${data.firstName} ${data.lastName}`} />
       <View style={styles.row}>
