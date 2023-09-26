@@ -24,5 +24,9 @@ setupListeners(store.dispatch);
 
 const persistor = persistStore(store);
 
+const getState = () => store;
+
 export type AppDispatch = typeof store.dispatch;
+export type TStoreState = ReturnType<typeof getState>;
+
 export {persistor, store};
