@@ -3,14 +3,14 @@ import {act, fireEvent, render} from '@utils/test-utils';
 
 import {AuthActions} from '@store/modules/auth';
 import {LoginScreen} from '@screens/Login';
-import {signMocked} from './Login.mocks';
+import {SIGN_MOCKED} from './Login.mocks';
 import {Navigator} from '@navigators/index';
 
-const SIGN_MOCKED = signMocked;
+const mocked = SIGN_MOCKED;
 jest.mock('@store/modules/api', () => ({
   ...jest.requireActual('@store/modules/api'),
   useSignInMutation: jest.fn(() => [
-    jest.fn().mockReturnValue({unwrap: jest.fn().mockReturnValue(SIGN_MOCKED)}),
+    jest.fn().mockReturnValue({unwrap: jest.fn().mockReturnValue(mocked)}),
     {isLoading: false},
   ]),
 }));
