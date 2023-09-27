@@ -1,11 +1,18 @@
 import React from 'react';
 import {act, fireEvent, render} from '@utils/test-utils';
-import {LoginScreen} from '@screens/Login';
-import {useSignInMutation} from '@store/modules/api';
 
+import {AuthActions} from '@store/modules/auth';
+import {LoginScreen} from '@screens/Login';
+import {SIGN_MOCKED} from './Login.mocks';
+import {Navigator} from '@navigators/index';
+
+const mocked = SIGN_MOCKED;
 jest.mock('@store/modules/api', () => ({
   ...jest.requireActual('@store/modules/api'),
-  useSignInMutation: jest.fn(() => [jest.fn(), {isLoading: false}]),
+  useSignInMutation: jest.fn(() => [
+    jest.fn().mockReturnValue({unwrap: jest.fn().mockReturnValue(mocked)}),
+    {isLoading: false},
+  ]),
 }));
 
 describe('LoginScreen', () => {
@@ -32,16 +39,13 @@ describe('LoginScreen', () => {
   });
 
   it('calls signIn function when the "Entrar" button is pressed', async () => {
-    const signInMock = jest.fn();
-    useSignInMutation.mockReturnValue([
-      signInMock.mockReturnValue({unwrap: jest.fn()}),
-      {isLoading: false},
-    ]);
+    const setAuthMocked = jest.spyOn(AuthActions, 'setAuth');
+    const username = 'testuser';
+    const password = 'testpassword';
 
-    const username = 'user_name_text';
-    const password = 'password_text';
-
-    const {getByText, getByPlaceholderText} = render(<LoginScreen />);
+    const {getByText, getByPlaceholderText, queryByPlaceholderText} = render(
+      <Navigator />,
+    );
     const usernameInput = getByPlaceholderText('Digite seu nome de usuário');
     const passwordInput = getByPlaceholderText('Digite sua senha');
 
@@ -49,10 +53,12 @@ describe('LoginScreen', () => {
     fireEvent.changeText(passwordInput, password);
     const signInButton = getByText('Entrar');
 
-    await act(() => {
-      fireEvent.press(signInButton);
+    await act(async () => {
+      await fireEvent.press(signInButton);
     });
+    const passwordInput2 = queryByPlaceholderText('Digite sua senha');
 
-    expect(signInMock).toBeCalledWith({username, password});
+    expect(passwordInput2).not.toBeOnTheScreen();
+    expect(setAuthMocked).toBeCalledWith(SIGN_MOCKED);
   });
 });
