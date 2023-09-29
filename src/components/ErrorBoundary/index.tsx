@@ -1,7 +1,9 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import RNRestart from 'react-native-restart';
 
 import {Typography} from '@components/Typography';
+import {Button} from '@components/Button';
 
 export class ErrorBoundary extends React.PureComponent<{
   children: React.ReactNode;
@@ -14,13 +16,21 @@ export class ErrorBoundary extends React.PureComponent<{
     return {error: true};
   }
 
+  handleBackToSignIn = async () => {
+    RNRestart.Restart();
+  };
+
   render() {
-    if (this.state.error) {
+    if (!this.state.error) {
       return (
         <View style={styles.container}>
-          <Typography variation="title">
-            Ocorreu um erro não esperando, por favor reiniciar a aplicação.
+          <Typography variation="title" style={styles.label}>
+            Ocorreu um erro não esperado, por favor reinicie o aplicativo.
           </Typography>
+          <Button
+            title="Reiniciar aplicativo"
+            onPress={this.handleBackToSignIn}
+          />
         </View>
       );
     } else {
@@ -35,5 +45,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 24,
+  },
+  label: {
+    color: '#000',
+    textAlign: 'center',
+    marginBottom: 24,
   },
 });

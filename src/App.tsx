@@ -21,10 +21,10 @@ function App(): JSX.Element {
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <ErrorBoundary>
-        <Provider store={store}>
-          <PersistGate persistor={persistor}>
-            <ThemeProvider>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <ThemeProvider>
+            <ErrorBoundary>
               <NavigationContainer>
                 <StatusBar
                   barStyle={isDarkMode ? 'light-content' : 'dark-content'}
@@ -32,10 +32,10 @@ function App(): JSX.Element {
                 />
                 <Navigator />
               </NavigationContainer>
-            </ThemeProvider>
-          </PersistGate>
-        </Provider>
-      </ErrorBoundary>
+            </ErrorBoundary>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
     </SafeAreaView>
   );
 }

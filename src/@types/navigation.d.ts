@@ -1,4 +1,4 @@
-import {Routes} from './routes';
+import {Routes} from '@navigators/routes';
 
 export declare global {
   namespace ReactNavigation {
