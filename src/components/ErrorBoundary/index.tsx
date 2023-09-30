@@ -21,7 +21,7 @@ export class ErrorBoundary extends React.PureComponent<{
   };
 
   render() {
-    if (!this.state.error) {
+    if (this.state.error) {
       return (
         <View style={styles.container}>
           <Typography variation="title" style={styles.label}>
